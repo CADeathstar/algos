@@ -67,3 +67,15 @@ int main()
 
     return 0;
 }
+
+int linearSearch (auto inputs, auto search_key)
+{
+	for (int i = 0; i < inputs.size(); i++)
+	{
+		if (inputs[i] == search_key)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
