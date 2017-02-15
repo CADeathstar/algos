@@ -2,6 +2,7 @@
 #include <cstdlib>//for "exit()" on some systems
 #include <vector>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
@@ -12,14 +13,12 @@ using namespace std;
 \param [in] data The data set that will be searched
 \returns location of key if found or -1 if not found
 */
-int linearSearch(auto data, auto key);//function prototype
-
+void BubbleSort(vector <string> &inputs); //function prototype 
 
 int main()
 {
   vector<string> inputs;
-  string search_key, input;
-  int result;
+  string input;
 
    cout<<"Welcome to \"search it\". We first need some input data."<<endl;
    cout<<"We'll assume the inputs do not have any spaces."<<endl<<endl;
@@ -41,41 +40,32 @@ int main()
        exit(1);//nothing to do but quit program
   }
  
-   cout<<endl<<"To end input type the #-character (followed by Enter)"<<endl<<endl;
-  cout<<"Enter a value to search for: ";
-
-
-   cin>>search_key;
+ BubbleSort(inputs); //Call BubbleSort Function
  
-    while(search_key != "#")//perform searches until sentinel entered
-    {
-        result = linearSearch(inputs,search_key);
-
-        cout<<"  '"<<search_key<<"' was ";
-
-        if (result == -1)
-          cout<<"not found";
-        else
-          cout<<"found at index "<<result;
-
-
-        cout<<endl<<endl<<"Enter a value to search for: ";
-        cin>>search_key; 
-    }
-
-   cout<<endl<<"Program \"search it\" is now finished."<<endl<<endl;
-
-    return 0;
+ for (unsigned int i=0;i< inputs.size();i++)
+ {
+	 cout << inputs[i] << endl;
+ }
+ 
 }
 
-int linearSearch (auto inputs, auto search_key)
+void BubbleSort (vector <string> &inputs) //BubbleSort Function
 {
-	for (int i = 0; i < inputs.size(); i++)
+	string temp;
+	for(unsigned int k=1;k< inputs.size();k++)//number of passes
 	{
-		if (inputs[i] == search_key)
-		{
-			return i;
-		}
+			for(unsigned int i=0;i<inputs.size()-k;i++)//number of swaps
+			{
+				if (inputs[i] > inputs[i+1])
+				{
+				temp = inputs[i];
+				inputs[i] = inputs[i+1];
+				inputs[i+1] = temp;
+				}
+			}
+			if ((k%20000 == 0) && (k > 0))
+			{
+				cout << "number of passes=" << k;
+			}
 	}
-	return -1;
 }
